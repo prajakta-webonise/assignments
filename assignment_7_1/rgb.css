@@ -1,0 +1,17 @@
+.red				/*Here red is the selector, background-color is property,#FF0000 = value (red) */
+{
+    background-color:#FF0000;
+}
+.green
+{
+    background-color:#008000;
+}
+.blue
+{
+    background-color:#0000FF;
+}
+
+.gray
+{
+    background-color:#ccc;
+}
