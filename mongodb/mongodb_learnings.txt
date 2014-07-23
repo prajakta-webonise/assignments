@@ -1,0 +1,53 @@
+﻿					Mongodb
+Mongodb is NoSQL database, where we do not model the data using tables as we do in relational databases.
+Main thing is that it is open source.
+It is document database meaning it has key-value pairs, or array of key-value pairs or embedded documents.
+For modeling data in Mongodb we must know the following terminology
+Database: It is collection of Collections.
+Collection: Group of documents form a collection. As we table in RDBMS, we have collection in Mongodb.
+Document: As we tuple/row in RDBMS we have document here. A document contains set of key-value pairs. It is not necessary that document have set of fields, it can vary and it can vary in type of data it stores. This make the schema dynamic.
+Joins are not supported in mongodb. So when you want to design a schema, keep in mind that all the things which you will require keep it in single document.
+For relating two documents, we can either embed one document into another, or reference one document in another by giving the ObjectId of the referenced field.
+Problem with mongodb is that a single query does not give you all, you need to fetch each and everything using multiple queries.
+Mongodb basic commands
+Create database
+Syntax: Use databaseName     
+Example: use myDatabase1
+List out the database name
+Syntax: show dbs     
+Create Collection
+Syntax: db.createCollection(name,options)     
+Example: db.createCollection(myCollection1)
+	The options field is optional.
+Create Document
+Syntax: db.collectionName.insert(document);    
+Example: db.myCollection1({ _id:1,
+			Test: ‘test_name’
+			Question: [question1,question2]	
+})
+
+Here, { } indicate a document, [ ] indicate array , _id is ObjectId.
+ObjectId is 12 byte hexadecimal field which is unique for every document, where 
+4bytes – timestamp, 3  bytes- machine id, 2 byte – process id, 3 bytes – incrementer
+Display data:
+Syntax: db.collection.find().pretty()     
+Example: db.myCollection.find().pretty()
+Query data:
+Syntax: db.collection.find()     
+Example: use myDatabase1
+Update data:
+Syntax: db.collection.update(condition,set parameters)    
+Example: db.myCollection1.updtae({‘test_id’:1},{$set{‘test_name’:’Computer’}})
+Delete data:
+Syntax: db.collection.remove(deleteCondition)     
+Example: db.myCollection.remove({‘test_id’:1},1) this will delete only 1 record the one which is found first. To delete all omit 1 from above example.
+
+Advantages of Mongodb
+As it is document based and do not have any specific structure, we can scale it easily.
+No joins are present here, we can use embedding, referencing, map/reduce.
+We can go on querying deeply.
+It generates automatic indexes, which gives result faster.
+
+
+
+

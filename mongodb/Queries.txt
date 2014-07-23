@@ -1,0 +1,126 @@
+﻿> db.test7.insert([{test_id:1, test_name: 'computer',questions: [ { question_id:1, question: 'who is this', option: [ {option1: 'a'} ,{option2:'b'},{option3:'c'},{option4:'d'}]},{ question_id:2, question: 'what is it', option: [{option1:'e'},{option2: 'f'},{option3:'g'},{option4:'h'}]}]},{test_id:2, test_name: 'science',questions: [ { question_id:1, question: 'what is cell', option: [ {option1: 'aa'} ,{option2:'bb'},{option3:'cc'},{option4:'dd'}]},{ question_id:2, question: 'what is it', option: [{option1:'e'},{option2: 'f'},{option3:'g'},{option4:'h'}]},{ question_id:3, question: 'what is it', option: [{option1:'e'},{option2: 'f'},{option3:'g'},{option4:'h'}]}]}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.test7.find().pretty()
+{
+	"_id" : ObjectId("53bffff94fc04217f0f73883"),
+	"test_id" : 1,
+	"test_name" : "computer",
+	"questions" : [
+		{
+			"question_id" : 1,
+			"question" : "who is this",
+			"option" : [
+				{
+					"option1" : "a"
+				},
+				{
+					"option2" : "b"
+				},
+				{
+					"option3" : "c"
+				},
+				{
+					"option4" : "d"
+				}
+			]
+		},
+		{
+			"question_id" : 2,
+			"question" : "what is it",
+			"option" : [
+				{
+					"option1" : "e"
+				},
+				{
+					"option2" : "f"
+				},
+				{
+					"option3" : "g"
+				},
+				{
+					"option4" : "h"
+				}
+			]
+		}
+	]
+}
+{
+	"_id" : ObjectId("53bffff94fc04217f0f73884"),
+	"test_id" : 2,
+	"test_name" : "science",
+	"questions" : [
+		{
+			"question_id" : 1,
+			"question" : "what is cell",
+			"option" : [
+				{
+					"option1" : "aa"
+				},
+				{
+					"option2" : "bb"
+				},
+				{
+					"option3" : "cc"
+				},
+				{
+					"option4" : "dd"
+				}
+			]
+		},
+		{
+			"question_id" : 2,
+			"question" : "what is it",
+			"option" : [
+				{
+					"option1" : "e"
+				},
+				{
+					"option2" : "f"
+				},
+				{
+					"option3" : "g"
+				},
+				{
+					"option4" : "h"
+				}
+			]
+		},
+		{
+			"question_id" : 3,
+			"question" : "what is it",
+			"option" : [
+				{
+					"option1" : "e"
+				},
+				{
+					"option2" : "f"
+				},
+				{
+					"option3" : "g"
+				},
+				{
+					"option4" : "h"
+				}
+			]
+		}
+	]
+}
+
+//update
+> db.test7.update({'test_id':1},{$set:{'questions.1.options.2.option4':'abc'}}
+... )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+//delete
+> db.test7.update({'test_id':2},{$unset:{'questions.2.options.3':1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.test7.update({'test_id':2},{$pull:{'questions.2.options':null}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })

@@ -1,0 +1,14 @@
+﻿We are familar with ACID properties of relational database. But for learning the BASE properties we need to know CAP theorem.
+CAP  theorem:
+This theorem was given by Eric Bewer.
+According to this theorem Consistency, Availability and Partition tolerance are the things which are necessary for perfect execution of a distributed system. ACID property only ensures consistency.
+At one time any system can be in either of the two states but not in all three states.
+So then came BASE 
+
+BASE:
+Basically available: This means that the system is available to you at any time. Meaning that if you request the system anything it will give you some response. But not necessarily that response is correct.
+Example: Suppose you have applied for Out Door application in your company.  The application may not have been approved yet, so it is pending state. When you request for status of OD application. It will give you response but it is a failure response as you expect it to be approved but it still pending.
+Soft state: The state of system is soft meaning that the system changes its state with time, even if there is no input to it.
+Example: In the above example, earlier the application was in pending state, and later on it will go in approved state. In this way system changes state. 
+Eventually consistent: Till your system receives input it is  not totally in consistent state. As it stops receiving input, it will become eventually consistent.
+Example: Consider same example again, the system ensures that if no modification is done with your OD application,  the last updated status will be returned. 
