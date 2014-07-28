@@ -1,0 +1,7 @@
+date
+hostname
+uname -a
+pwd
+who
+getent passwd | cut -d: -f1
+
