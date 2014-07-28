@@ -1,0 +1,186 @@
+> db.assessments.insert({test_id:1, test_name: 'computer',questions: [ { question_id:1, question: 'who is this', option: [ {option1: 'a'} ,{option2:'b'},{option3:'c'},{option4:'d'}]},{ question_id:2, question: 'what is it', option: [{option1:'e'},{option2: 'f'},{option3:'g'},{option4:'h'}]}]})
+WriteResult({ "nInserted" : 1 })
+> db.assessments.find().pretty()
+{
+	"_id" : ObjectId("53d2636a78dff1ac2c19a698"),
+	"test_id" : 1,
+	"test_name" : "computer",
+	"questions" : [
+		{
+			"question_id" : 1,
+			"question" : "who is this",
+			"option" : [
+				{
+					"option1" : "a"
+				},
+				{
+					"option2" : "b"
+				},
+				{
+					"option3" : "c"
+				},
+				{
+					"option4" : "d"
+				}
+			]
+		},
+		{
+			"question_id" : 2,
+			"question" : "what is it",
+			"option" : [
+				{
+					"option1" : "e"
+				},
+				{
+					"option2" : "f"
+				},
+				{
+					"option3" : "g"
+				},
+				{
+					"option4" : "h"
+				}
+			]
+		}
+	]
+}
+
+////updation
+> db.assessments.update({'test_id':1},{$set:{'questions.1.option.1.option2':'aaa'}} )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.assessments.find().pretty()
+{
+	"_id" : ObjectId("53d2636a78dff1ac2c19a698"),
+	"test_id" : 1,
+	"test_name" : "computer",
+	"questions" : [
+		{
+			"question_id" : 1,
+			"question" : "who is this",
+			"option" : [
+				{
+					"option1" : "a"
+				},
+				{
+					"option2" : "b"
+				},
+				{
+					"option3" : "c"
+				},
+				{
+					"option4" : "d"
+				}
+			]
+		},
+		{
+			"question_id" : 2,
+			"question" : "what is it",
+			"option" : [
+				{
+					"option1" : "e"
+				},
+				{
+					"option2" : "aaa"
+				},
+				{
+					"option3" : "g"
+				},
+				{
+					"option4" : "h"
+				}
+			]
+		}
+	]
+}
+
+///deletion
+> db.assessments.update({'test_id':1},{$unset:{'questions.1.option.3':1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.assessments.find().pretty()
+{
+	"_id" : ObjectId("53d2636a78dff1ac2c19a698"),
+	"test_id" : 1,
+	"test_name" : "computer",
+	"questions" : [
+		{
+			"question_id" : 1,
+			"question" : "who is this",
+			"option" : [
+				{
+					"option1" : "a"
+				},
+				{
+					"option2" : "b"
+				},
+				{
+					"option3" : "c"
+				},
+				{
+					"option4" : "d"
+				}
+			]
+		},
+		{
+			"question_id" : 2,
+			"question" : "what is it",
+			"option" : [
+				{
+					"option1" : "e"
+				},
+				{
+					"option2" : "aaa"
+				},
+				{
+					"option3" : "g"
+				},
+				null
+			]
+		}
+	]
+}
+
+> db.assessments.update({'test_id':1},{$pull:{'questions.1.option':null}} )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.assessments.find().pretty()
+{
+	"_id" : ObjectId("53d2636a78dff1ac2c19a698"),
+	"test_id" : 1,
+	"test_name" : "computer",
+	"questions" : [
+		{
+			"question_id" : 1,
+			"question" : "who is this",
+			"option" : [
+				{
+					"option1" : "a"
+				},
+				{
+					"option2" : "b"
+				},
+				{
+					"option3" : "c"
+				},
+				{
+					"option4" : "d"
+				}
+			]
+		},
+		{
+			"question_id" : 2,
+			"question" : "what is it",
+			"option" : [
+				{
+					"option1" : "e"
+				},
+				{
+					"option2" : "aaa"
+				},
+				{
+					"option3" : "g"
+				}
+			]
+		}
+	]
+}
+
+
